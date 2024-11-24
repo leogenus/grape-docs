@@ -31,7 +31,25 @@ Blocks are the building units of a method. Each block has specific properties an
 
 ### Block Types
 
-1. **Query Block** (`QUERY_BLOCK`)
+1. **Return Block** (`RETURN_BLOCK`)
+   - Returns data from the method
+   - Properties:
+     - `type`: Return type (e.g., `VARIABLES` or `CONSTANT`)
+     - `valueType`: Type of value being returned (e.g., `VALUE`, `OBJECT` or `RESOURCE`) 
+     - `value`: The actual return value or variable name (e.g., "hello world", 42, {"success": true})
+    For example:
+    ```json
+      {
+        "id" : "4d755a3ef23d41d3a64bcff0b91b71901",
+        "type" : "RETURN_BLOCK",
+        "details" : {
+          "type" : "VARIABLES",
+          "valueType" : "VALUE",
+          "value" : "one"
+        }
+      }```
+
+2. **Query Block** (`QUERY_BLOCK`)
    - Executes SQL queries
    - Properties:
      - `query`: SQL query string
@@ -41,13 +59,6 @@ Blocks are the building units of a method. Each block has specific properties an
        - `variable`: Name of the output variable
        - `type`: Output type (e.g., "OBJECT", "LIST")
      - `nextId`: ID of the next block to execute
-
-2. **Return Block** (`RETURN_BLOCK`)
-   - Returns data from the method
-   - Properties:
-     - `type`: Return type (e.g., "VARIABLES")
-     - `valueType`: Type of value being returned
-     - `value`: The actual return value or variable name
 
 ## Example Method
 
