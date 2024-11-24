@@ -29,6 +29,16 @@ Parameters are defined as objects with the following properties:
 
 Blocks are the building units of a method. Each block has specific properties and types.
 
+> All blocks follow this base structure:
+> ```json
+>{
+>  "id": "{md5}", // unique id for the block, for example: "e50bae469accca7efe4c9f8d8b84fbad"
+>  "parentId": "{md5}", // or null
+>  "type": "{blockType}", // for example: "RETURN_BLOCK" or several types in section below
+>  "details": {...} // { spesific block details for every type }
+> }
+> ```
+
 ### Block Types
 
 1. **Return Block** (`RETURN_BLOCK`)
@@ -37,19 +47,44 @@ Blocks are the building units of a method. Each block has specific properties an
      - `type`: Return type (e.g., `VARIABLES` or `CONSTANT`)
      - `valueType`: Type of value being returned (e.g., `VALUE`, `OBJECT` or `RESOURCE`) 
      - `value`: The actual return value or variable name (e.g., "hello world", 42, {"success": true})
-    For example:
-    ```json
-      {
-        "id" : "4d755a3ef23d41d3a64bcff0b91b71901",
-        "type" : "RETURN_BLOCK",
-        "details" : {
-          "type" : "VARIABLES",
-          "valueType" : "VALUE",
-          "value" : "one"
-        }
-      }```
+    > For example:
+    > ```json
+    >   {
+    >     // ... base block structure
+    >     "type": "RETURN_BLOCK", 
+    >     "details": {
+    >       "type": "CONSTANT",
+    >       "valueType": "VALUE",
+    >       "value": "Hello World"
+    >     }
+    >   }
+    > ```
 
-2. **Query Block** (`QUERY_BLOCK`)
+1. **Declare Block** (`DECLARE_BLOCK`)
+   - Declares variables for use in the method
+   - Properties:
+     - `variables`: Variable declaration details
+       - `name`: Name of the variable
+       - `type`: Data type of the variable
+       - `value`: Initial value assigned to the variable
+     - `nextId`: ID of the next block to execute
+    > For example:
+    > ```json
+    >   {
+    >     // ... base block structure
+    >     "type": "DECLARE_BLOCK", 
+    >     "details": {
+    >       "variables": {
+    >         "name": "var1",
+    >         "type": "String", 
+    >         "value": "test"
+    >       },
+    >       "nextId": "{md5}" // id of the next block to execute or can be null
+    >     }
+    >   }
+    > ```
+
+3. **Query Block** (`QUERY_BLOCK`)
    - Executes SQL queries
    - Properties:
      - `query`: SQL query string
