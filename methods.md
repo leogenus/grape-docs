@@ -116,15 +116,34 @@ Here's a breakdown of the "GetOneUser" method:
 }
 ```
 
-This method:
-1. Accepts a required integer parameter `id`
-2. Queries the Users table for matching records
-3. Returns the user object as a Custom type
+This method demonstrates key concepts from the documentation:
+
+1. Parameter Definition:
+   - Uses proper parameter structure with `type` and `required` fields
+   - Accepts an `id` parameter of type Integer
+
+3. Return Type:
+   - Specifies Custom return type for the user object
+   - Matches the query output configuration
+
+Note: The `parentId` field is not explicitly mentioned in the provided documentation for individual blocks. It's typically used in more complex flow structures to establish parent-child relationships between blocks, but it's not a standard field for basic blocks like QUERY_BLOCK or RETURN_BLOCK.
 
 ## Best Practices
 
-1. Always specify clear parameter names and types
-2. Use meaningful variable names for query outputs
-3. Ensure proper block connections using `nextId`
-4. Consider transactional requirements
-5. Validate parameter requirements
+1. Parameter Definition
+   - Use clear, descriptive parameter names (e.g., `id`)
+   - Always specify `type` and `required` status in parameter objects
+
+2. Block Structure
+   - Maintain proper block connections via `nextId`
+   - End flows with appropriate RETURN_BLOCK
+   - Consider transaction boundaries if needed
+
+3. Error Handling
+   - Implement proper error handling mechanisms
+   - Use try-catch blocks or error handling blocks as necessary
+
+4. Performance Considerations
+   - Optimize queries for efficiency
+   - Use appropriate indexing in the database
+   - Consider caching strategies for frequently accessed data
