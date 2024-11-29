@@ -37,7 +37,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: 'https://gitlab.com/onzabr/rbc-cms-docs',
+    repo: 'https://github.com/leogenus/grape-docs',
     editLinks: true,
     docsDir: 'src',
     editLinkText: 'Edit this page on GitLab',
