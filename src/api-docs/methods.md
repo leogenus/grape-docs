@@ -277,19 +277,129 @@ Each block contains the following fields:
 
 ### 8. **Http Execute Block**
    > Type: `HTTP_EXECUTE_BLOCK`
-   > Under construction.
+   > It sends the request to the given url, retrieves the response and initializes the returned data in output.
+
+   - Properties:
+   - `method`: The method type that will be used in block (e.g., "GET" for getting data, "POST" for posting the request)
+   - `url`: The URL that the request should be sent 
+   - `headers`: For initializing the headers that can be used in request
+   - `mapping`: It defines the body of the request
+   - `body`: The body that will be used in request
+  
+  > For example:
+  > ```json
+  >   {
+  >      // ... base block structure for GET method
+  >      "type": "HTTP_EXECUTE_BLOCK",
+  >      "details": {
+  >        "method": "GET",
+  >        "url": "https://jsonplaceholder.typicode.com/todos/1",
+  >        "headers": {
+  >          "Content-Type": "application/json"
+  >        },
+  >        "mapping": {},
+  >        "body": "body",
+  >        "output": {
+  >          "variable": "sampleData",
+  >          "type": "OBJECT"
+  >        }
+  >      }
+  >    }
+  > ```
 
 ### 9. **Method Call Block** 
    > Type: `METHOD_CALL_BLOCK`
-   > Under construction.
+   > Calls another method by given methodId, gets the returned value from it and initializes the value in the result.
+
+   - Properties:
+   - `arguments`: The arguments that should be send for creating the scope of calling method
+   - `methodId`: The ID of a called method
+   - `result`: The key name for initializing the returned result from called method
+
+
+  > For example:
+  > ```json
+  >    {
+  >      "arguments": {
+  >        "var1": "expVar1",
+  >        "var2": "expVar1"
+  >      },
+  >      "methodId": "{md5}",
+  >      "result": "var3"
+  >    }
+  > ```
 
 ### 10. **File Save Block**
    > Type: `FILE_SAVE_BLOCK`
-   > Under construction.
-    
+   > This block is used to save files to the file system, allowing you to specify how and where the files should be stored. After saving it sets two paths (absolute and relative) to variables with given or default names for next usages (may be returned).
+
+   - Properties:
+    - Type: String  
+    - Required: No, default -> variable + '_absolutePath'
+    - Example: "absoluteFilePath"  
+
+  - `subFilename`:  
+    - Description: The name used to store the relative file path in the scope.
+    - Type: String  
+    - Required:  No, default -> variable + "_subPath"  
+    - Example: "relativeFilePath"  
+
+  - `path`:  
+    - Description: The sub-path under the file directory where the file will be saved.  
+    - Type: String  
+    - Required: No, default {projectFileStoragePath}/home  
+    - Example: "images/uploads"  
+
+  - `variable`:  
+    - Description: The name of the variable containing the file data to save. 
+    - Type: String  
+    - Required: Yes  
+    - Example: "picture" 
+
+  > For example:
+  > ```json
+  >   {
+  >      "absoluteFilename": "fileAbsolute",
+  >      "subFilename": "fileSub",
+  >      "path": "/nimadr",
+  >      "variable": "file"
+  >   }
+  > ```
+
 ### 11. **File Read Block**
    > Type: `FILE_READ_BLOCK`
-   > Under construction.
+   > The FILE_READ_BLOCK allows you to load file contents from the filesystem into the method scope for further use with given variable. Loads from given absolute or relative path.
+
+   - Properties:
+   - `pathType`:  
+    - Description: Indicates the type of file path to use (absolute or relative).  
+    - Type: FilePathType Enum  
+    - Possible values:  
+      - ABSOLUTE: Represents an absolute file path (e.g., `/home/user/file.txt`).  
+      - SUB: Represents a relative file path starting from the application's workspace directory (e.g., `documents/file.txt`).  
+  - Required: Yes  
+  - Example: "ABSOLUTE"
+
+   - `path`:  
+    - Description: Specifies the file path to read.  
+    - Type: String  
+    - Required: Yes  
+    - Example: "documents/myfile.txt"
+
+   - `variable`:  
+    - Description: The name of the variable where the file contents will be stored in the scope.  
+    - Type: String  
+    - Required: Yes  
+    - Example: "picture"
+
+  > For example:
+  > ```json
+  >   {
+  >       "pathType": "ABSOLUTE",
+  >       "path": "absolutePath",
+  >       "variable": "file"
+  >   }
+  > ```
 
 ## Example Method
 
