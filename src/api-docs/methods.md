@@ -285,7 +285,7 @@ Each block contains the following fields:
    - `headers`: For initializing the headers that can be used in request
    - `mapping`: It defines the body of the request
    - `body`: The body that will be used in request
-  
+
   > For example:
   > ```json
   >   {
@@ -319,14 +319,18 @@ Each block contains the following fields:
 
   > For example:
   > ```json
-  >    {
-  >      "arguments": {
-  >        "var1": "expVar1",
-  >        "var2": "expVar1"
-  >      },
-  >      "methodId": "{md5}",
-  >      "result": "var3"
-  >    }
+  >   {
+  >     // ... base block structure
+  >     "type": "METHOD_CALL_BLOCK",
+  >     "details": {
+  >        "arguments": {
+  >          "var1": "expVar1",
+  >          "var2": "expVar1"
+  >        },
+  >        "methodId": "{md5}",
+  >        "result": "var3"
+  >      }
+  >   }
   > ```
 
 ### 10. **File Save Block**
@@ -356,14 +360,24 @@ Each block contains the following fields:
     - Required: Yes  
     - Example: "picture" 
 
+
   > For example:
   > ```json
   >   {
-  >      "absoluteFilename": "fileAbsolute",
-  >      "subFilename": "fileSub",
-  >      "path": "/nimadr",
-  >      "variable": "file"
+  >     // ... base block structure
+  >     "type": "FILE_SAVE_BLOCK",
+  >     "details": {
+  >       "absoluteFilename": "fileAbsolute",
+  >       "subFilename": "fileSub",
+  >       "path": "/nimadr",
+  >       "variable": "file"
+  >     }
   >   }
+  > ```
+
+  > For example:
+  > ```json
+  >   
   > ```
 
 ### 11. **File Read Block**
@@ -392,12 +406,17 @@ Each block contains the following fields:
     - Required: Yes  
     - Example: "picture"
 
+
   > For example:
   > ```json
   >   {
+  >     // ... base block structure
+  >     "type": "FILE_READ_BLOCK",
+  >     "details": {
   >       "pathType": "ABSOLUTE",
   >       "path": "absolutePath",
   >       "variable": "file"
+  >     }
   >   }
   > ```
 
